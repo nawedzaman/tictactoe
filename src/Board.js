@@ -1,9 +1,17 @@
 import React, { useState } from "react";
 import Square from "./Square";
-import Reset from "./images/Button";
+import Results from "./Results";
 const Board = () => {
   const [state, setState] = useState(Array(9).fill(null));
   const [isXTurn, setIsXturn] = useState(true);
+  const [scores, setScores] = useState({
+    x: 0,
+    o: 0,
+    tie: 0,
+  });
+  const handleReset = () => {
+    setState(Array(9).fill(null));
+  };
   const isDraw = !state.includes(null);
   const checkWinner = () => {
     const winnerLogic = [
@@ -26,19 +34,25 @@ const Board = () => {
   };
   const isWinner = checkWinner();
   const handleClick = (index) => {
+    if (isDraw) {
+      handleReset();
+      setScores((prevState) => ({ ...prevState, tie: prevState.tie + 1 }));
+      return;
+    }
     if (state[index] !== null) {
       return;
     }
     if (isWinner) {
+      handleReset();
+      isWinner === "X"
+        ? setScores((prevState) => ({ ...prevState, x: prevState.x + 1 }))
+        : setScores((prevState) => ({ ...prevState, o: prevState.o + 1 }));
       return;
     }
     const copyState = [...state];
     copyState[index] = isXTurn ? "X" : "O";
     setState(copyState);
     setIsXturn(!isXTurn);
-  };
-  const handleReset = () => {
-    setState(Array(9).fill(null));
   };
   return (
     <div className="board-container">
@@ -64,8 +78,8 @@ const Board = () => {
         <Square onClick={() => handleClick(7)} value={state[7]} />
         <Square onClick={() => handleClick(8)} value={state[8]} />
       </div>
-      <div className="board-row">
-        <Reset onClick={() => handleReset()} />
+      <div className="results">
+        <Results score={scores} />
       </div>
     </div>
   );

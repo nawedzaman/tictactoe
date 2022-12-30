@@ -33,3 +33,14 @@ button{
   height: auto;
   width: 50px;
 }
+.scores{
+  display: flex;
+  justify-content: center;
+}
+.playerNames{
+  padding: 15px;
+}
+.scoreValues{
+ display: flex;
+ justify-content: center;
+}
