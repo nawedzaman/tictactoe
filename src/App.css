@@ -36,7 +36,6 @@ button{
   height: 60px;
   width: 65px;
 }
-
 .button:active {
   transform: translateY(4px);
 }
@@ -55,4 +54,10 @@ button{
 .scoreValues{
  display: flex;
  justify-content: center;
+}
+.button-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 100px;
 }
