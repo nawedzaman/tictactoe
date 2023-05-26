@@ -12,10 +12,14 @@ const Board = () => {
     setBoard(Array(9).fill(null));
   };
   const handleResetScores = () => {
-    setBoard(Array(9).fill(null));
+    handleReset();
     setScores({ x: 0, o: 0, tie: 0 });
   };
-
+  const handleMode = (mode) => {
+    console.log(mode);
+    handleResetScores();
+    setIsSinglePlayer(mode);
+  };
   const checkWinner = (board) => {
     const winnerLogic = [
       [0, 1, 2],
@@ -126,10 +130,22 @@ const Board = () => {
   }, [board]);
   return (
     <>
-      <button onClick={() => setIsSinglePlayer(true)}>Vs AI</button>
-      <button onClick={() => setIsSinglePlayer(false)}>2 Player</button>
+      <div className="mode-container">
+        <button
+          className={isSinglePlayer ? "ai" : ""}
+          onClick={() => handleMode(true)}
+        >
+          Vs AI
+        </button>
+        <button
+          className={isSinglePlayer ? "" : "human"}
+          onClick={() => handleMode(false)}
+        >
+          2 Player
+        </button>
+      </div>
+
       <div className="button-container">
-        <button onClick={handleResetScores}>Reset Scores</button>
         <button onClick={handleReset}>New Game</button>
       </div>
       <div className="board-container">
@@ -157,6 +173,9 @@ const Board = () => {
         </div>
         <div className="results">
           <Results score={scores} />
+        </div>
+        <div className="button-container">
+          <button onClick={handleResetScores}>Reset Scores</button>
         </div>
       </div>
     </>

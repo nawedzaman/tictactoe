@@ -28,16 +28,19 @@ h4{
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
 }
 button{
   margin: 15px;
   border-radius: 100%;
   height: 60px;
   width: 65px;
+  background-color: #123;
+  color:#fff;
 }
-.button:active {
+.button.active {
   transform: translateY(4px);
+
 }
 .resetIcon{
   height: auto;
@@ -59,5 +62,11 @@ button{
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 100px;
+}
+.mode-container button.ai {
+ color: green; /* Set the desired background color */
+  /* Additional styles for the active button */
+}.mode-container button.human {
+color: green; /* Set the desired background color */
+  /* Additional styles for the active button */
 }
